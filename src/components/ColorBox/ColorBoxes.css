@@ -1,0 +1,8 @@
+.ColorBoxes {
+    max-width: 700px;
+    margin-left: 10%;
+    width: 80%;
+    aspect-ratio: 1;
+    display: flex;
+    flex-wrap: wrap;
+}

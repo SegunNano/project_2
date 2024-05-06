@@ -1,0 +1,5 @@
+.ColorBox {
+    width: 20%;
+    aspect-ratio: 1;
+    transition: linear 500ms;
+}
