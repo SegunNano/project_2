@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import './Todo.css';
 const Todo = () => {
@@ -24,6 +24,7 @@ const Todo = () => {
                     {
                         todos.map(({ text, id }) => {
                             return <li onDoubleClick={() => removeTodo(id)} key={id} className="todo">
+                                <span>{ }</span>
                                 <span>{text}</span>
                             </li>;
                         })
