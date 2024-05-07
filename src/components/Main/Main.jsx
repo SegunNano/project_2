@@ -5,7 +5,7 @@ import './Main.css';
 const Main = () => {
     let meals = [];
     const [items, setItems] = useState([]);
-    useEffect(() => {
+    function getData() {
         axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood')
             .then(res1 => {
                 axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?c=Pork')
@@ -26,6 +26,9 @@ const Main = () => {
             .catch((err) => {
                 console.log(err);
             });
+    }
+    useEffect(() => {
+        getData();
     }, []);
     function handleClick(id) {
         axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
@@ -37,32 +40,11 @@ const Main = () => {
                 console.log(err);
             });
     }
-    function returnMain() {
-        axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood')
-            .then(res1 => {
-                axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?c=Pork')
-                    .then(res2 => {
-                        axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?c=chicken')
-                            .then(res3 => {
-                                meals = [...res1.data.meals, ...res2.data.meals, ...res3.data.meals];
-                                setItems(meals);
-                            })
-                            .catch((err) => {
-                                console.log(err);
-                            });
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
+
     const itemsList = items.map(({ strMeal, strMealThumb, idMeal, strInstructions, strIngredient1, strIngredient10, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strArea, strCategory, strTags, strYoutube }) => {
         if (items.length === 1) {
             return <>
-                <div onClick={returnMain} style={{ background: `linear-gradient(rgba(255, 255, 255, .6), rgba(255, 255, 255, 0.6)), url(${strMealThumb})`, backgroundRepeat: 'no - repeat', backgroundPosition: 'center', backgroundSize: 'cover' }} className="bg-container">
+                <div onClick={getData} style={{ background: `linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(${strMealThumb})`, backgroundRepeat: 'no - repeat', backgroundPosition: 'center', backgroundSize: 'cover' }} className="bg-container">
                     <div className="card2">
                         <div>
                             <img src={strMealThumb} alt="" />
